@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Job Spring is coming soon! Get notified when we launch and be the first to explore new job opportunities.">
+    <meta name="keywords" content="Job Spring, coming soon, job opportunities, launch notification">
+    <meta name="author" content="Job Spring">
+    <title>Coming Soon - Job Spring</title>
+    <link rel="preload" href="{{ url_for('static', filename='bg1.jpg') }}" as="image">
+    <link rel="preload" href="{{ url_for('static', filename='job.jpg') }}" as="image">
+    <link rel="preload" href="{{ url_for('static', filename='craft.png') }}" as="image">
+    <link rel="preload" href="{{ url_for('static', filename='instagram.png') }}" as="image">
+    <link rel="preload" href="{{ url_for('static', filename='linkedin.png') }}" as="image">
+    <link rel="preload" href="{{ url_for('static', filename='twitter.png') }}" as="image">
+    <link rel="preload" href="{{ url_for('static', filename='youtube.png') }}" as="image">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background-image: url("{{ url_for('static', filename='bg1.jpg') }}");
+            background-position: center;
+            background-size: cover;
+            padding: 0 8%;
+            position: relative;
+            overflow: hidden;
+        }
+        .logo {
+            width: 250px;
+            padding: 20px 0;
+            cursor: pointer;
+        }
+        .content {
+            top: 50%;
+            position: absolute;
+            transform: translateY(-50%);
+            color: #070707;
+        }
+        .content h1 {
+            font-size: 64px;
+            font-weight: 600;
+        }
+        .content h1 span {
+            color: red;
+        }
+        input {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px;
+            background: #2a08ef;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .launch-time {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+        .launch-time div {
+            flex-basis: 100px;
+            text-align: center;
+        }
+        .launch-time p {
+            background: #082eec;
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            font-size: 50px;
+        }
+        .launch-time span {
+            display: block;
+            margin-top: 10px;
+            font-size: 20px;
+            color: #6a6767;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .launch-time {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .launch-time div {
+                margin-bottom: 20px;
+            }
+            .launch-time p {
+                font-size: 40px;
+                padding: 15px 20px;
+            }
+            .launch-time span {
+                font-size: 18px;
+            }
+        }
+        .social-icons {
+            position: absolute;
+            width: 400px;
+            top: 40px;
+            right: -40px;
+        }
+        .rocket {
+            width: 2000px;
+            max-width: 100%;
+            height: auto;
+            position: absolute;
+            right: -30%;
+            bottom: -25%;
+            opacity: 0.8;
+        }
+        .call p {
+            color: #700606;
+        }
+        .social-icons a {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        .social-icons a img {
+            width: 35px;
+            transition: transform 0.3s;
+        }
+        .social-icons a img:hover {
+            transform: scale(1.1);
+        }
+        #message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .message.success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .message.error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='job.jpg') }}" class="logo" alt="Job Spring Logo">
+        <div class="content">
+            <h1>Coming <span>Soon</span></h1>
+            <br><br>
+            <div class="launch-time">
+                <div>
+                    <p id="days">00</p>
+                    <span>Days</span>
+                </div>
+                <div>
+                    <p id="hours">00</p>
+                    <span>Hours</span>
+                </div>
+                <div>
+                    <p id="minutes">00</p>
+                    <span>Minutes</span>
+                </div>
+                <div>
+                    <p id="seconds">00</p>
+                    <span>Seconds</span>
+                </div>
+            </div>
+            <br><br><br><br>
+            <h2>Get Notified When We Launch!</h2>
+            <br><br>
+            <form id="email-form">
+                <input type="email" id="email-input" placeholder="Enter your email" required>
+                <button type="submit" id="subscribe-btn">Notify me!</button>
+            </form>
+            <br>
+            <div id="message"></div>
+            <div class="call"><p>Don't Worry We Will Not Spam You :)</p></div>
+        </div>
+        <img src="{{ url_for('static', filename='craft.png') }}" class="rocket" alt="Rocket Image">
+        <div class="social-icons">
+            <a href="#"><img src="{{ url_for('static', filename='instagram.png') }}" alt="Instagram"></a>
+            <a href="#"><img src="{{ url_for('static', filename='linkedin.png') }}" alt="LinkedIn"></a>
+            <a href="#"><img src="{{ url_for('static', filename='twitter.png') }}" alt="Twitter"></a>
+            <a href="#"><img src="{{ url_for('static', filename='youtube.png') }}" alt="YouTube"></a>
+        </div>
+    </div>
+
+    <script>
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 7);
+        launchDate.setHours(launchDate.getHours() + 21);
+        launchDate.setMinutes(launchDate.getMinutes() + 43);
+        launchDate.setSeconds(launchDate.getSeconds() + 36);
+
+        function updateCountdown() {
+            const now = new Date();
+            const distance = launchDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.querySelector('.launch-time').innerHTML = '<h2>We Are Live!</h2>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        document.getElementById('email-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('email-input');
+            const messageDiv = document.getElementById('message');
+            const email = emailInput.value.trim();
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                messageDiv.textContent = 'Please enter a valid email address';
+                messageDiv.className = 'message error';
+                return;
+            }
+
+            fetch('/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    messageDiv.textContent = data.error;
+                    messageDiv.className = 'message error';
+                } else {
+                    messageDiv.textContent = data.message;
+                    messageDiv.className = 'message success';
+                    emailInput.value = '';
+                }
+            })
+            .catch(error => {
+                messageDiv.textContent = 'An error occurred. Please try again.';
+                messageDiv.className = 'message error';
+            });
+        });
+    </script>
+</body>
+</html>
